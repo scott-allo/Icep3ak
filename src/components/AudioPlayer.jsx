@@ -1,27 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
+import { Howl } from 'howler';
 
-const AudioPlayer = ({ enabled }) => {
-  const [audio] = useState(new Audio('/assets/audio/background.mp3'));
-  const [isPlaying, setIsPlaying] = useState(false);
+export default function AudioPlayer({ enabled }) {
+  const soundRef = useRef(null);
 
   useEffect(() => {
-    if (enabled) {
-      audio.loop = true;
-      audio.volume = 0.5;
-      audio.play().then(() => {
-        setIsPlaying(true);
-      }).catch(error => {
-        console.error('Erreur lors de la lecture audio:', error);
+    if (enabled && !soundRef.current) {
+      soundRef.current = new Howl({
+        src: ['/assets/audio/ambient.mp3'],
+        loop: true,
+        volume: 0.3,
+        onplayerror: function() {
+          soundRef.current.once('unlock', function() {
+            soundRef.current.play();
+          });
+        }
       });
+      
+      // Démarrage avec interaction utilisateur
+      const handleFirstInteraction = () => {
+        soundRef.current.play();
+        document.removeEventListener('click', handleFirstInteraction);
+      };
+      
+      document.addEventListener('click', handleFirstInteraction);
     }
 
     return () => {
-      audio.pause();
-      audio.currentTime = 0;
+      if (soundRef.current) {
+        soundRef.current.stop();
+        soundRef.current = null;
+      }
     };
-  }, [enabled, audio]);
+  }, [enabled]);
 
-  return null; // Ce composant ne rend rien visuellement
-};
-
-export default AudioPlayer; 
+  return null;
+} 
