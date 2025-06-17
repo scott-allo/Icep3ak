@@ -5,11 +5,13 @@ import Terminal from './components/Terminal';
 import GlitchLogo from './components/GlitchLogo';
 import NoiseOverlay from './components/NoiseOverlay';
 import AudioPlayer from './components/AudioPlayer';
+import CustomCursor from './components/CustomCursor';
 import './styles/main.scss';
 
 function App() {
   return (
     <div className="app">
+      <CustomCursor />
       <GlitchLogo />
       <Navigation />
       <NoiseOverlay />
