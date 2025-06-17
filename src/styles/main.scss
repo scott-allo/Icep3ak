@@ -1,0 +1,49 @@
+// Variables
+$primary-color: #000000;
+$secondary-color: #ff0000;
+$background-color: #1a1a1a;
+$text-color: #ffffff;
+
+// Reset
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: $background-color;
+  color: $text-color;
+  line-height: 1.6;
+}
+
+// Layout
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+// Navigation
+.nav {
+  padding: 1rem 0;
+  
+  &__list {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 2rem;
+  }
+  
+  &__link {
+    color: $text-color;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: bold;
+    
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+} 
