@@ -17,6 +17,7 @@ function App() {
   return (
     <div className="app">
       <NoiseOverlay />
+      <div className="scanlines"></div>
       <AudioPlayer enabled={audioEnabled} />
       
       <Routes>

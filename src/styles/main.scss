@@ -1,110 +1,133 @@
 // Variables
-$primary-color: #000000;
-$secondary-color: #ff0000;
-$background-color: #1a1a1a;
-$text-color: #ffffff;
-$accent-color: #0ff;
-$accent-color-2: #f0f;
+$glitch-color-1: #0ff;
+$glitch-color-2: #f0f;
+$bg-color: #000;
+$text-color: #fff;
 
-// Reset
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+// Mixins
+@mixin glitch-effect($offset: 2px) {
+  text-shadow: 
+    $offset $offset 0 $glitch-color-1,
+    -$offset -$offset 0 $glitch-color-2;
 }
 
+// Base styles
 body {
-  font-family: 'Arial', sans-serif;
-  background-color: $background-color;
+  background-color: $bg-color;
   color: $text-color;
-  line-height: 1.6;
-  overflow-x: hidden;
+  font-family: 'Share Tech Mono', monospace;
+  overflow: hidden;
+  margin: 0;
+  height: 100vh;
 }
 
-// Home Page
-.home-page {
-  min-height: 100vh;
+.app {
+  position: relative;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 2rem;
+}
+
+// Glitch text
+.glitch-text-container {
   position: relative;
-}
-
-.main-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-}
-
-.main-title {
-  margin-bottom: 4rem;
-  font-size: 6rem;
-  letter-spacing: 0.5rem;
-}
-
-.links-container {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  align-items: center;
-}
-
-.glitch-link {
-  font-size: 2rem;
-  cursor: pointer;
-  letter-spacing: 0.3rem;
-  transition: color 0.3s;
-  text-transform: uppercase;
-  position: relative;
+  display: inline-block;
   
-  &:hover {
-    color: $accent-color;
+  .glitch-text-original, 
+  .glitch-text-clone {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  .glitch-text-clone {
+    opacity: 0;
   }
 }
 
+// Links
+.links-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.glitch-link {
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  
+  &:hover {
+    @include glitch-effect();
+  }
+}
+
+// Footer
 .footer {
   display: flex;
   justify-content: center;
   gap: 2rem;
-  padding: 2rem;
-  z-index: 2;
+  flex-wrap: wrap;
+  padding: 1rem;
   
   .footer-link {
     color: $text-color;
     text-decoration: none;
+    text-transform: uppercase;
     font-size: 0.8rem;
     letter-spacing: 0.2rem;
-    transition: color 0.3s;
+    position: relative;
     
-    &:hover {
-      color: $accent-color-2;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: $glitch-color-1;
+      transition: width 0.3s;
+    }
+    
+    &:hover::after {
+      width: 100%;
     }
   }
 }
 
-// Responsive
-@media (max-width: 768px) {
-  .main-title {
-    font-size: 4rem;
-  }
-  
-  .glitch-link {
-    font-size: 1.5rem;
-  }
-  
-  .footer {
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
+// Scanlines overlay (via CSS)
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  pointer-events: none;
+  z-index: 100;
+  mix-blend-mode: overlay;
 }
 
-// Layout
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 20px;
+// Noise effect (via CSS)
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 99;
 } 
