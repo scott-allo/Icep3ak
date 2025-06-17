@@ -1,133 +1,111 @@
-// Variables
-$glitch-color-1: #0ff;
-$glitch-color-2: #f0f;
-$bg-color: #000;
-$text-color: #fff;
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
-// Mixins
-@mixin glitch-effect($offset: 2px) {
-  text-shadow: 
-    $offset $offset 0 $glitch-color-1,
-    -$offset -$offset 0 $glitch-color-2;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-// Base styles
 body {
-  background-color: $bg-color;
-  color: $text-color;
+  background-color: #000;
+  color: #fff;
   font-family: 'Share Tech Mono', monospace;
-  overflow: hidden;
-  margin: 0;
-  height: 100vh;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #0ff;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: transform 0.2s ease;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4px;
+    height: 4px;
+    background-color: #f0f;
+    border-radius: 50%;
+  }
 }
 
 .app {
+  min-height: 100vh;
   position: relative;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 2rem;
+  overflow: hidden;
 }
 
-// Glitch text
-.glitch-text-container {
+.content {
+  padding: 100px 240px 40px 40px;
+  min-height: 100vh;
+}
+
+.home-container,
+.music-container,
+.videos-container {
   position: relative;
-  display: inline-block;
+  z-index: 1;
+}
+
+.glitch-text {
+  font-size: 64px;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px #0ff, -2px -2px #f0f;
+  animation: textGlitch 3s infinite;
+}
+
+.section-title {
+  font-size: 36px;
+  color: #0ff;
+  margin-bottom: 30px;
+  position: relative;
   
-  .glitch-text-original, 
-  .glitch-text-clone {
+  &::after {
+    content: '';
     position: absolute;
-    top: 0;
+    bottom: -10px;
     left: 0;
-  }
-  
-  .glitch-text-clone {
-    opacity: 0;
-  }
-}
-
-// Links
-.links-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  margin-top: 3rem;
-}
-
-.glitch-link {
-  font-size: 1.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.3rem;
-  cursor: pointer;
-  transition: all 0.3s;
-  position: relative;
-  
-  &:hover {
-    @include glitch-effect();
+    width: 100px;
+    height: 2px;
+    background: linear-gradient(90deg, #0ff, transparent);
   }
 }
 
-// Footer
-.footer {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-  padding: 1rem;
-  
-  .footer-link {
-    color: $text-color;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    letter-spacing: 0.2rem;
-    position: relative;
-    
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -2px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: $glitch-color-1;
-      transition: width 0.3s;
-    }
-    
-    &:hover::after {
-      width: 100%;
-    }
-  }
-}
-
-// Scanlines overlay (via CSS)
-.scanlines {
+.cyber-grid {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background: repeating-linear-gradient(
-    0deg,
-    rgba(0, 0, 0, 0.15),
-    rgba(0, 0, 0, 0.15) 1px,
-    transparent 1px,
-    transparent 2px
-  );
+  right: 0;
+  bottom: 0;
+  background-image: 
+    linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  transform: perspective(500px) rotateX(60deg);
+  transform-origin: center top;
   pointer-events: none;
-  z-index: 100;
-  mix-blend-mode: overlay;
+  z-index: 0;
 }
 
-// Noise effect (via CSS)
-.noise-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 99;
-} 
+@keyframes textGlitch {
+  0%, 100% { transform: translate(0); }
+  20% { transform: translate(-2px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  60% { transform: translate(-2px, -2px); }
+  80% { transform: translate(2px, 2px); }
+}
+
+// Import other component styles
+@import 'Terminal.scss';
+@import 'Navigation.scss';
+@import 'GlitchLogo.scss'; 

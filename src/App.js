@@ -1,32 +1,52 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Music from './pages/Music';
-import Videos from './pages/Videos';
+import Navigation from './components/Navigation';
+import Terminal from './components/Terminal';
+import GlitchLogo from './components/GlitchLogo';
 import NoiseOverlay from './components/NoiseOverlay';
 import AudioPlayer from './components/AudioPlayer';
+import './styles/main.scss';
 
 function App() {
-  const [audioEnabled, setAudioEnabled] = useState(false);
-
-  useEffect(() => {
-    // Effet de curseur personnalisé
-    document.body.style.cursor = 'url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'16\' height=\'16\' viewBox=\'0 0 16 16\'><circle cx=\'8\' cy=\'8\' r=\'7\' fill=\'none\' stroke=\'white\' stroke-width=\'1\'/></svg>") 8 8, auto';
-  }, []);
-
   return (
     <div className="app">
+      <GlitchLogo />
+      <Navigation />
       <NoiseOverlay />
-      <div className="scanlines"></div>
-      <AudioPlayer enabled={audioEnabled} />
-      
-      <Routes>
-        <Route path="/" element={<Home enableAudio={() => setAudioEnabled(true)} />} />
-        <Route path="/music" element={<Music />} />
-        <Route path="/videos" element={<Videos />} />
-      </Routes>
+      <div className="content">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/music" element={<Music />} />
+          <Route path="/videos" element={<Videos />} />
+        </Routes>
+      </div>
+      <Terminal />
+      <AudioPlayer />
     </div>
   );
 }
+
+const Home = () => (
+  <div className="home-container">
+    <div className="glitch-text">
+      WELCOME TO THE VOID
+    </div>
+    <div className="cyber-grid"></div>
+  </div>
+);
+
+const Music = () => (
+  <div className="music-container">
+    <h2 className="section-title">MUSIC</h2>
+    {/* Add your music content here */}
+  </div>
+);
+
+const Videos = () => (
+  <div className="videos-container">
+    <h2 className="section-title">VIDEOS</h2>
+    {/* Add your videos content here */}
+  </div>
+);
 
 export default App; 
