@@ -105,4 +105,38 @@
   &::after {
     animation: glitch-2 0.3s infinite linear alternate-reverse;
   }
+}
+
+.metal-logo {
+  width: 420px;
+  max-width: 90vw;
+  filter: drop-shadow(0 0 16px #0ff) drop-shadow(0 0 32px #f0f);
+  transition: filter 0.3s;
+  user-select: none;
+}
+
+.metal-logo:hover {
+  filter: drop-shadow(0 0 32px #0ff) drop-shadow(0 0 64px #f0f) brightness(1.2);
+}
+
+.metal-text-logo {
+  font-family: 'DeathMohawk', 'Share Tech Mono', monospace;
+  font-size: 120px;
+  color: #fff;
+  letter-spacing: 0.1em;
+  text-shadow:
+    0 0 8px #0ff,
+    0 0 16px #f0f,
+    2px 2px 0 #000,
+    -2px -2px 0 #000;
+  filter: drop-shadow(0 0 16px #0ff) drop-shadow(0 0 32px #f0f);
+  transition: filter 0.3s, color 0.3s;
+  user-select: none;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.metal-text-logo:hover {
+  filter: drop-shadow(0 0 32px #0ff) drop-shadow(0 0 64px #f0f) brightness(1.2);
+  color: #0ff;
 } 
