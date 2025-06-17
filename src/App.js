@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Terminal from './components/Terminal';
@@ -6,11 +6,13 @@ import GlitchLogo from './components/GlitchLogo';
 import NoiseOverlay from './components/NoiseOverlay';
 import AudioPlayer from './components/AudioPlayer';
 import CustomCursor from './components/CustomCursor';
-import './styles/main.scss';
+import '../src/styles/main.scss';
 
 function App() {
+  const [glitchMode, setGlitchMode] = useState(false);
+
   return (
-    <div className="app">
+    <div className={`app${glitchMode ? ' glitch-mode' : ''}`}>
       <div className="noise-bg" />
       <CustomCursor />
       <GlitchLogo />
@@ -25,6 +27,16 @@ function App() {
       </div>
       <Terminal />
       <AudioPlayer />
+      <button
+        className={`wings-toggle${glitchMode ? ' active' : ''}`}
+        onClick={() => setGlitchMode((g) => !g)}
+        aria-pressed={glitchMode}
+        title={glitchMode ? 'Désactiver Glitch Mode' : 'Activer Glitch Mode'}
+      >
+        <span className="wing left">{'<'}</span>
+        <span style={{ width: '24px', display: 'inline-block' }}></span>
+        <span className="wing right">{'>'}</span>
+      </button>
     </div>
   );
 }

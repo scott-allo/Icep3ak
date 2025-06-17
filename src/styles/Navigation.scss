@@ -2,39 +2,24 @@
   position: fixed;
   top: 0;
   right: 0;
-  padding: 20px;
-  z-index: 1000;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(10px);
-  border-left: 1px solid #0ff;
+  width: 200px;
   height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  border-left: 1px solid #0ff;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 200px;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-      0deg,
-      transparent 0%,
-      rgba(0, 255, 255, 0.1) 50%,
-      transparent 100%
-    );
-    pointer-events: none;
-    animation: scanline 6s linear infinite;
-  }
+  align-items: center;
+  z-index: 1000;
 }
 
 .nav-glitch-container {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  align-items: center;
+  width: 100%;
+  margin-top: -500px;
 }
 
 .nav-link {
@@ -46,6 +31,8 @@
   letter-spacing: 2px;
   padding: 5px 10px;
   transition: all 0.3s ease;
+  text-align: center;
+  width: 100%;
   
   &::before {
     content: attr(data-text);
