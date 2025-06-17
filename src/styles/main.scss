@@ -3,6 +3,8 @@ $primary-color: #000000;
 $secondary-color: #ff0000;
 $background-color: #1a1a1a;
 $text-color: #ffffff;
+$accent-color: #0ff;
+$accent-color-2: #f0f;
 
 // Reset
 * {
@@ -16,6 +18,88 @@ body {
   background-color: $background-color;
   color: $text-color;
   line-height: 1.6;
+  overflow-x: hidden;
+}
+
+// Home Page
+.home-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
+  position: relative;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.main-title {
+  margin-bottom: 4rem;
+  font-size: 6rem;
+  letter-spacing: 0.5rem;
+}
+
+.links-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+.glitch-link {
+  font-size: 2rem;
+  cursor: pointer;
+  letter-spacing: 0.3rem;
+  transition: color 0.3s;
+  text-transform: uppercase;
+  position: relative;
+  
+  &:hover {
+    color: $accent-color;
+  }
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
+  z-index: 2;
+  
+  .footer-link {
+    color: $text-color;
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.2rem;
+    transition: color 0.3s;
+    
+    &:hover {
+      color: $accent-color-2;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 4rem;
+  }
+  
+  .glitch-link {
+    font-size: 1.5rem;
+  }
+  
+  .footer {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
 }
 
 // Layout
@@ -23,27 +107,4 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
-}
-
-// Navigation
-.nav {
-  padding: 1rem 0;
-  
-  &__list {
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    gap: 2rem;
-  }
-  
-  &__link {
-    color: $text-color;
-    text-decoration: none;
-    text-transform: uppercase;
-    font-weight: bold;
-    
-    &:hover {
-      color: $secondary-color;
-    }
-  }
 } 
