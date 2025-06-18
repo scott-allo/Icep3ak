@@ -6,10 +6,12 @@ import GlitchLogo from './components/GlitchLogo';
 import NoiseOverlay from './components/NoiseOverlay';
 import AudioPlayer from './components/AudioPlayer';
 import CustomCursor from './components/CustomCursor';
+import VideoOverlay from './VideoOverlay';
 import '../src/styles/main.scss';
 
 function App() {
   const [glitchMode, setGlitchMode] = useState(false);
+  const [showVideoOverlay, setShowVideoOverlay] = useState(false);
 
   return (
     <div className={`app${glitchMode ? ' glitch-mode' : ''}`}>
@@ -27,9 +29,10 @@ function App() {
       </div>
       <Terminal />
       <AudioPlayer />
+      <VideoOverlay show={showVideoOverlay} onClose={() => setShowVideoOverlay(false)} />
       <button
         className={`wings-toggle${glitchMode ? ' active' : ''}`}
-        onClick={() => setGlitchMode((g) => !g)}
+        onClick={() => setShowVideoOverlay(true)}
         aria-pressed={glitchMode}
         title={glitchMode ? 'Désactiver Glitch Mode' : 'Activer Glitch Mode'}
       >
