@@ -7,7 +7,7 @@
 }
 
 body {
-  min-height: 100vh;
+  height: 100vh;
   background:
     radial-gradient(ellipse at 60% 10%, rgba(0,255,255,0.10) 0%, transparent 60%),
     radial-gradient(ellipse at 20% 90%, rgba(255,0,255,0.10) 0%, transparent 60%),
@@ -15,7 +15,7 @@ body {
     linear-gradient(120deg, #10101a 0%, #181828 100%);
   color: #fff;
   font-family: 'Share Tech Mono', monospace;
-  overflow-x: hidden;
+  overflow: hidden;
   cursor: none;
   position: relative;
 }
@@ -53,20 +53,23 @@ body {
   left: 0;
   width: 100vw;
   height: 100vh;
-  opacity: 0.13;
+  opacity: 0.08;
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.5"/></svg>');
   background-size: 200px 200px;
 }
 
 .app {
-  min-height: 100vh;
+  height: 100vh;
   position: relative;
   overflow: hidden;
 }
 
 .content {
-  padding: 100px 240px 40px 40px;
-  min-height: 100vh;
+  padding: 0 240px 0 40px;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .home-container,
@@ -74,14 +77,6 @@ body {
 .videos-container {
   position: relative;
   z-index: 1;
-}
-
-.glitch-text {
-  font-size: 64px;
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 2px 2px #0ff, -2px -2px #f0f;
-  animation: textGlitch 3s infinite;
 }
 
 .section-title {
@@ -115,14 +110,6 @@ body {
   transform-origin: center top;
   pointer-events: none;
   z-index: 0;
-}
-
-@keyframes textGlitch {
-  0%, 100% { transform: translate(0); }
-  20% { transform: translate(-2px, 2px); }
-  40% { transform: translate(2px, -2px); }
-  60% { transform: translate(-2px, -2px); }
-  80% { transform: translate(2px, 2px); }
 }
 
 // Import other component styles
@@ -162,19 +149,19 @@ body {
   // Effet de scanlines plus fort
   .cyber-grid {
     opacity: 0.5;
-    filter: blur(0.5px) brightness(1.2) contrast(1.2);
-    animation: grid-glitch 0.7s infinite linear alternate;
+    filter: blur(0.3px) brightness(1.1) contrast(1.1);
+    animation: grid-glitch 1s infinite linear alternate;
   }
   // Logo qui bouge
   .metal-text-logo {
-    animation: logo-glitch 0.25s infinite steps(2, end) alternate;
+    animation: logo-glitch 0.5s infinite steps(2, end) alternate;
     filter: drop-shadow(0 0 32px #0ff) drop-shadow(0 0 64px #f0f) brightness(1.3);
     color: #fff;
   }
   // Bruit plus fort
   .noise-bg {
     opacity: 0.25;
-    filter: contrast(1.5) brightness(1.2);
+    filter: contrast(1.2) brightness(1.1);
   }
   // Terminal plus flashy
   .terminal {
@@ -185,36 +172,32 @@ body {
   // Navigation glitch
   .cyber-nav .nav-link {
     text-shadow: 0 0 8px #0ff, 0 0 16px #f0f;
-    animation: nav-glitch 0.5s infinite steps(2, end) alternate;
+    animation: nav-glitch 1s infinite steps(2, end) alternate;
   }
 }
 
 @keyframes logo-glitch {
   0% { transform: translate(0,0) skewX(0deg); }
-  20% { transform: translate(-2px, 2px) skewX(-2deg); }
-  40% { transform: translate(2px, -2px) skewX(2deg); }
-  60% { transform: translate(-1px, 1px) skewX(-1deg); }
-  80% { transform: translate(1px, -1px) skewX(1deg); }
+  50% { transform: translate(-1px, 1px) skewX(-1deg); }
   100% { transform: translate(0,0) skewX(0deg); }
 }
 
 @keyframes grid-glitch {
-  0% { filter: blur(0.5px) brightness(1.2) contrast(1.2); }
-  50% { filter: blur(1.5px) brightness(1.4) contrast(1.4); }
+  0% { filter: blur(0.3px) brightness(1.1) contrast(1.1); }
   100% { filter: blur(0.5px) brightness(1.2) contrast(1.2); }
 }
 
 @keyframes nav-glitch {
   0% { letter-spacing: 2px; }
-  50% { letter-spacing: 6px; }
+  50% { letter-spacing: 4px; }
   100% { letter-spacing: 2px; }
 }
 
 .wings-toggle {
   position: fixed;
   bottom: 32px;
-  right: 45px;
-  z-index: 2000;
+  right: 32px;
+  z-index: 6000;
   width: 100px;
   height: 100px;
   background: rgba(0,0,0,0.85);
@@ -250,14 +233,11 @@ body {
   filter: drop-shadow(0 0 16px #f0f) drop-shadow(0 0 32px #0ff);
 }
 .app.glitch-mode .wings-toggle .wing {
-  animation: wings-glitch 0.3s infinite steps(2, end) alternate;
+  animation: wings-glitch 0.6s infinite steps(2, end) alternate;
 }
 @keyframes wings-glitch {
   0% { transform: translateY(0) scale(1); }
-  20% { transform: translateY(-2px) scale(1.05); }
-  40% { transform: translateY(2px) scale(0.98); }
-  60% { transform: translateY(-1px) scale(1.03); }
-  80% { transform: translateY(1px) scale(1.01); }
+  50% { transform: translateY(-1px) scale(1.02); }
   100% { transform: translateY(0) scale(1); }
 }
 
@@ -285,4 +265,84 @@ body {
 
 .cyber-nav {
   margin-top: 0;
+}
+
+.skills-circle-bar {
+  position: fixed;
+  top: 35%;
+  left: 45%;
+  transform: translate(-50%, -50%);
+  width: 480px;
+  height: 480px;
+  animation: skillsFadeIn 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform, opacity;
+  z-index: 3000;
+  
+  svg {
+    display: block;
+    margin: 0 auto;
+    animation: skillsRotate 16s linear infinite;
+    will-change: transform;
+    transform-box: fill-box;
+  }
+}
+
+// Optimisations pour mobile
+@media (max-width: 768px) {
+  .skills-circle-bar {
+    width: 320px;
+    height: 320px;
+    margin-top: -40px;
+    
+    svg {
+      animation: skillsRotate 20s linear infinite; // Plus lent sur mobile
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-circle-bar {
+    display: none; // Cache complètement sur très petits écrans
+  }
+}
+
+// Optimisation des animations
+@keyframes skillsFadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes skillsRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// Optimisation du bruit (si utilisé)
+.noise-bg {
+  pointer-events: none;
+  position: fixed;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.08; // Réduit légèrement
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.5"/></svg>');
+  background-size: 200px 200px;
+}
+
+@media (max-width: 768px) {
+  .noise-bg {
+    opacity: 0.05; // Encore moins sur mobile
+  }
 } 

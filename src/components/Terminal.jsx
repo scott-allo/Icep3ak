@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 
-function Terminal() {
+function Terminal({ onSkillsCommand }) {
   const [commands, setCommands] = useState([
     { text: "> SYSTEM INITIALIZED", type: "system" },
     { text: "> WELCOME TO IC3PEAK_", type: "system" },
@@ -11,7 +11,7 @@ function Terminal() {
   const outputRef = useRef(null);
 
   const availableCommands = {
-    help: "Available commands: help, clear, about, music, videos",
+    help: "Available commands: help, clear, about, music, videos, skills",
     clear: () => setCommands([]),
     about: "IC3PEAK is a Russian electronic music duo known for their dark and experimental sound.",
     music: "Redirecting to music section...",
@@ -24,6 +24,14 @@ function Terminal() {
     if (command === '') return;
 
     setCommands(prev => [...prev, { text: `> ${cmd}`, type: "user" }]);
+
+    if (command === 'skills') {
+      if (onSkillsCommand) onSkillsCommand();
+      setCommands(prev => [...prev, { text: "Compétences techniques :", type: "system" }]);
+      return;
+    } else {
+      if (onSkillsCommand) onSkillsCommand(false);
+    }
 
     if (command in availableCommands) {
       const response = typeof availableCommands[command] === 'function' 

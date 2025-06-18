@@ -30,14 +30,14 @@
   &::before {
     left: 2px;
     text-shadow: -2px 0 #0ff;
-    animation: glitch-1 2s infinite linear alternate-reverse;
+    animation: glitch-1 4s infinite linear alternate-reverse;
     clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
   }
   
   &::after {
     left: -2px;
     text-shadow: 2px 0 #f0f;
-    animation: glitch-2 3s infinite linear alternate-reverse;
+    animation: glitch-2 5s infinite linear alternate-reverse;
     clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
   }
 }
@@ -47,21 +47,9 @@
     clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
     transform: translate(0);
   }
-  20% {
-    clip-path: polygon(0 15%, 100% 15%, 100% 45%, 0 45%);
-    transform: translate(-2px, 2px);
-  }
-  40% {
-    clip-path: polygon(0 30%, 100% 30%, 100% 45%, 0 45%);
-    transform: translate(2px, -2px);
-  }
-  60% {
-    clip-path: polygon(0 45%, 100% 45%, 100% 45%, 0 45%);
-    transform: translate(2px, 2px);
-  }
-  80% {
-    clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-    transform: translate(-2px, -2px);
+  50% {
+    clip-path: polygon(0 20%, 100% 20%, 100% 45%, 0 45%);
+    transform: translate(-1px, 1px);
   }
   100% {
     clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
@@ -74,21 +62,9 @@
     clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
     transform: translate(0);
   }
-  20% {
-    clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
-    transform: translate(-2px, 2px);
-  }
-  40% {
-    clip-path: polygon(0 75%, 100% 75%, 100% 100%, 0 100%);
-    transform: translate(2px, -2px);
-  }
-  60% {
-    clip-path: polygon(0 85%, 100% 85%, 100% 100%, 0 100%);
-    transform: translate(2px, 2px);
-  }
-  80% {
-    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
-    transform: translate(-2px, -2px);
+  50% {
+    clip-path: polygon(0 70%, 100% 70%, 100% 100%, 0 100%);
+    transform: translate(1px, -1px);
   }
   100% {
     clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
@@ -99,11 +75,11 @@
 // Hover effect
 .glitch-logo:hover {
   &::before {
-    animation: glitch-1 0.3s infinite linear alternate-reverse;
+    animation: glitch-1 0.6s infinite linear alternate-reverse;
   }
   
   &::after {
-    animation: glitch-2 0.3s infinite linear alternate-reverse;
+    animation: glitch-2 0.6s infinite linear alternate-reverse;
   }
 }
 
@@ -139,4 +115,17 @@
 .metal-text-logo:hover {
   filter: drop-shadow(0 0 32px #0ff) drop-shadow(0 0 64px #f0f) brightness(1.2);
   color: #0ff;
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .metal-text-logo {
+    font-size: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .metal-text-logo {
+    font-size: 80px;
+  }
 } 
